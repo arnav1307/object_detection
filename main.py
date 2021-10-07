@@ -7,7 +7,9 @@ thres = 0.5 #threshold value for detection
 #cap = cv2.VideoCapture(0) #for webcam
 cap = cv2.VideoCapture("objects.mp4")
 cap.set(3,640)
-cap.set(4,480)
+cap.set(4,420)
+
+#Good Project File
 
 
 classNames = []
@@ -21,8 +23,8 @@ weightsPath = 'frozen_inference_graph.pb'
 
 net = cv2.dnn_DetectionModel(weightsPath, configPath)
 net.setInputSize(320,320)
-net.setInputScale(1.0/ 127.5)
-net.setInputMean((127.5, 127.5, 127.5))
+net.setInputScale(1.0/ 128)
+net.setInputMean((128, 128, 128))
 net.setInputSwapRB(True)
 
 while True:
@@ -38,6 +40,7 @@ while True:
                 cv2.putText(img, str(round(confidence * 100, 2)), (box[0] + 200, box[1] + 30),
                             cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
 
+                
         cv2.imshow('frame', img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
